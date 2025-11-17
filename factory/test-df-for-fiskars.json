@@ -1,0 +1,9 @@
+{
+	"name": "test-df-for-fiskars",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d3d5e946-e258-45ed-a0aa-99c68916ebac",
+		"tenantId": "074b83a9-939e-4f0b-bf3a-fe680d883afd"
+	}
+}
