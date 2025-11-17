@@ -1,0 +1,464 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "test-df-for-fiskars"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "documents"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"status": {
+							"type": "string"
+						},
+						"createdDateTime": {
+							"type": "string"
+						},
+						"lastUpdatedDateTime": {
+							"type": "string"
+						},
+						"analyzeResult": {
+							"type": "object",
+							"properties": {
+								"apiVersion": {
+									"type": "string"
+								},
+								"modelId": {
+									"type": "string"
+								},
+								"stringIndexType": {
+									"type": "string"
+								},
+								"content": {
+									"type": "string"
+								},
+								"pages": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"pageNumber": {
+												"type": "integer"
+											},
+											"angle": {
+												"type": "number"
+											},
+											"width": {
+												"type": "number"
+											},
+											"height": {
+												"type": "number"
+											},
+											"unit": {
+												"type": "string"
+											},
+											"words": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"content": {
+															"type": "string"
+														},
+														"polygon": {
+															"type": "array",
+															"items": {
+																"type": "number"
+															}
+														},
+														"confidence": {
+															"type": "number"
+														},
+														"span": {
+															"type": "object",
+															"properties": {
+																"offset": {
+																	"type": "integer"
+																},
+																"length": {
+																	"type": "integer"
+																}
+															}
+														}
+													}
+												}
+											},
+											"selectionMarks": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"state": {
+															"type": "string"
+														},
+														"polygon": {
+															"type": "array",
+															"items": {
+																"type": "number"
+															}
+														},
+														"confidence": {
+															"type": "number"
+														},
+														"span": {
+															"type": "object",
+															"properties": {
+																"offset": {
+																	"type": "integer"
+																},
+																"length": {
+																	"type": "integer"
+																}
+															}
+														}
+													}
+												}
+											},
+											"lines": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"content": {
+															"type": "string"
+														},
+														"polygon": {
+															"type": "array",
+															"items": {
+																"type": "number"
+															}
+														},
+														"spans": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"offset": {
+																		"type": "integer"
+																	},
+																	"length": {
+																		"type": "integer"
+																	}
+																}
+															}
+														}
+													}
+												}
+											},
+											"spans": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"offset": {
+															"type": "integer"
+														},
+														"length": {
+															"type": "integer"
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								"tables": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"rowCount": {
+												"type": "integer"
+											},
+											"columnCount": {
+												"type": "integer"
+											},
+											"cells": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"rowIndex": {
+															"type": "integer"
+														},
+														"columnIndex": {
+															"type": "integer"
+														},
+														"content": {
+															"type": "string"
+														},
+														"boundingRegions": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"pageNumber": {
+																		"type": "integer"
+																	},
+																	"polygon": {
+																		"type": "array",
+																		"items": {
+																			"type": "number"
+																		}
+																	}
+																}
+															}
+														},
+														"spans": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"offset": {
+																		"type": "integer"
+																	},
+																	"length": {
+																		"type": "integer"
+																	}
+																}
+															}
+														},
+														"elements": {
+															"type": "array",
+															"items": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											},
+											"boundingRegions": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"pageNumber": {
+															"type": "integer"
+														},
+														"polygon": {
+															"type": "array",
+															"items": {
+																"type": "number"
+															}
+														}
+													}
+												}
+											},
+											"spans": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"offset": {
+															"type": "integer"
+														},
+														"length": {
+															"type": "integer"
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								"paragraphs": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"spans": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"offset": {
+															"type": "integer"
+														},
+														"length": {
+															"type": "integer"
+														}
+													}
+												}
+											},
+											"boundingRegions": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"pageNumber": {
+															"type": "integer"
+														},
+														"polygon": {
+															"type": "array",
+															"items": {
+																"type": "number"
+															}
+														}
+													}
+												}
+											},
+											"content": {
+												"type": "string"
+											}
+										}
+									}
+								},
+								"styles": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"confidence": {
+												"type": "number"
+											},
+											"spans": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"offset": {
+															"type": "integer"
+														},
+														"length": {
+															"type": "integer"
+														}
+													}
+												}
+											},
+											"isHandwritten": {
+												"type": "boolean"
+											}
+										}
+									}
+								},
+								"contentFormat": {
+									"type": "string"
+								},
+								"sections": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"spans": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"offset": {
+															"type": "integer"
+														},
+														"length": {
+															"type": "integer"
+														}
+													}
+												}
+											},
+											"elements": {
+												"type": "array",
+												"items": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								},
+								"figures": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"id": {
+												"type": "string"
+											},
+											"boundingRegions": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"pageNumber": {
+															"type": "integer"
+														},
+														"polygon": {
+															"type": "array",
+															"items": {
+																"type": "number"
+															}
+														}
+													}
+												}
+											},
+											"spans": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"offset": {
+															"type": "integer"
+														},
+														"length": {
+															"type": "integer"
+														}
+													}
+												}
+											},
+											"elements": {
+												"type": "array",
+												"items": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
