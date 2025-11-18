@@ -3,11 +3,28 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				""
+				"source(output(",
+				"          status as string,",
+				"          createdDateTime as string,",
+				"          lastUpdatedDateTime as string,",
+				"          analyzeResult as (apiVersion as string, modelId as string, stringIndexType as string, content as string, pages as (pageNumber as integer, angle as double, width as double, height as double, unit as string, words as (content as string, polygon as double[], confidence as double, span as (offset as integer, length as integer))[], selectionMarks as (state as string, polygon as double[], confidence as double, span as (offset as integer, length as integer))[], lines as (content as string, polygon as double[], spans as (offset as integer, length as integer)[])[], spans as (offset as integer, length as integer)[])[], tables as (rowCount as integer, columnCount as integer, cells as (rowIndex as integer, columnIndex as integer, content as string, boundingRegions as (pageNumber as integer, polygon as double[])[], spans as (offset as integer, length as integer)[], elements as string[])[], boundingRegions as (pageNumber as integer, polygon as double[])[], spans as (offset as integer, length as integer)[])[], paragraphs as (spans as (offset as integer, length as integer)[], boundingRegions as (pageNumber as integer, polygon as double[])[], content as string)[], styles as (confidence as double, spans as (offset as integer, length as integer)[], isHandwritten as boolean)[], contentFormat as string, sections as (spans as (offset as integer, length as integer)[], elements as string[])[], figures as (id as string, boundingRegions as (pageNumber as integer, polygon as double[])[], spans as (offset as integer, length as integer)[], elements as string[])[])",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> source1"
 			]
 		}
 	}
